@@ -10,8 +10,6 @@ import (
 func Registerapi(r *gin.Engine) *gin.Engine {
 	api := r.Group("api/v1")
 	api.GET("/ping", controller.PingAPI)
-	api.POST("/users",controller.CreateUser) {
-
-	})
+	api.POST("/users", controller.CreateUser)
 	return r
 }
