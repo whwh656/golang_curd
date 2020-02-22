@@ -1,3 +1,5 @@
 Server:
-  Port : ":9000"
-  Environment : "dev"
+  Port: ":9000"
+  Environment: "dev"
+Mysql:
+  Dsn : "root:111111@tcp(127.0.0.1:3306)/curd?charset=utf8"

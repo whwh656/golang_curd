@@ -8,14 +8,21 @@ package main
 import (
 	"curd/api"
 	"curd/config"
+	"fmt"
+
+	"curd/model"
 
 	"github.com/gin-gonic/gin"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 func main() {
-	r := gin.Default()
-	route := api.Registerapi(r)
-	port := config.GetConf()
-	route.Run(port.Server.Port)
-
+	if err := model.InitMySQL(); err != 1 {
+		fmt.Println("mysql init error")
+	} else {
+		r := gin.Default()
+		route := api.Registerapi(r)
+		port := config.GetConf()
+		route.Run(port.Server.Port)
+	}
 }

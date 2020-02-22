@@ -18,6 +18,19 @@ type ConfInfo struct {
 	Environment string `yaml:"Environment"`
 }
 
+//WrapMysql mysqlconf
+type WrapMysql struct {
+	Mysql MysqlDB `yaml:"Mysql"`
+}
+
+//MysqlDB dbconfig
+type MysqlDB struct {
+	Dsn          string `yaml:"Dsn"`
+	MaxOpenConns int    `yaml:"max_open_conns"`
+	MaxIdleConns int    `yaml:"max_idle_conns"`
+	MaxLifeConns int    `yaml:"max_life_conns"`
+}
+
 // GetConf 获取yaml中的port字符串
 func GetConf() *WrapConfInfo {
 	var confInfo WrapConfInfo
@@ -26,6 +39,16 @@ func GetConf() *WrapConfInfo {
 		fmt.Println("error")
 	}
 	yaml.Unmarshal(yamlFile, &confInfo)
-	fmt.Println(confInfo.Server.Port)
 	return &confInfo
+}
+
+// GetdbConf 获取yaml中的dsn字符串
+func GetdbConf() *WrapMysql {
+	var mysqlconf WrapMysql
+	yamlFile, err := ioutil.ReadFile("./config/app.yaml")
+	if err != nil {
+		fmt.Println("error")
+	}
+	yaml.Unmarshal(yamlFile, &mysqlconf)
+	return &mysqlconf
 }
