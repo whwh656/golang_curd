@@ -17,12 +17,12 @@ import (
 )
 
 func main() {
-	if err := model.InitMySQL(); err != 1 {
+	if _, err := model.InitMySQL(); err != nil {
 		fmt.Println("mysql init error")
 	} else {
 		r := gin.Default()
 		route := api.Registerapi(r)
-		port := config.GetConf()
-		route.Run(port.Server.Port)
+		conf := config.GetConf()
+		route.Run(conf.Server.Port)
 	}
 }
