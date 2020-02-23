@@ -2,8 +2,7 @@ package api
 
 import (
 	"curd/controller"
-
-	"github.com/gin-gonic/gin"
+    "github.com/gin-gonic/gin"
 )
 
 //Registerapi 外部调用必须首字母大写

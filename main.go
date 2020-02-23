@@ -8,11 +8,9 @@ package main
 import (
 	"curd/api"
 	"curd/config"
-	"fmt"
-
 	"curd/model"
-
-	"github.com/gin-gonic/gin"
+	"fmt"
+    "github.com/gin-gonic/gin"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
