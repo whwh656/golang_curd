@@ -24,6 +24,13 @@ func ListUser() {
 //CreateUser Post add a user  如何获取json数据存入mysql数据库
 func CreateUser(c *gin.Context) {
 	user := model.User{}
+	// name := c.PostForm("name")
+	// age  := c.PostForm("age")
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"method": c.Request.Method,
+	// 	"name": name,
+	// 	"job": age,
+	//  })
 	if err := c.BindJSON(&user); err != nil {
 		c.JSON(400, gin.H{
 			"errcode": 400,
