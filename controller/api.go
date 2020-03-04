@@ -59,10 +59,28 @@ func CreateUser(c *gin.Context) {
 	}
 }
 
+//UpdateUser 更新数据
 func UpdateUser(c *gin.Context){
-
+    
 }
 
+//删除数据 
 func DelUser(c *gin.Context){
+	var person model.User
+	id := c.Param("uid")
+	fmt.Println(id)
+	err := model.DeleteUser(&person, id)
+	if err != nil {
+		c.JSON(400, gin.H{
+			"errcode": 400,
+			"msg":     "del Data Err",
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"errcode": 999999,
+			"msg":     "del Data Success",
+		})
+	}
+
 	
 }

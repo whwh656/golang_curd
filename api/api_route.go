@@ -49,6 +49,6 @@ func Registerapi(r *gin.Engine) *gin.Engine {
 	api.POST("/users", controller.CreateUser)
 	api.GET("/users",controller.ListUser)
 	api.PUT("/users/",controller.UpdateUser)
-	api.POST("/users/id",controller.DelUser)
+	api.DELETE("/user/:uid",controller.DelUser)
     return r
 }

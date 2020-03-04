@@ -34,3 +34,11 @@ func (user *User) AddUser() error {
 // func (users *User) ListUser() error {
 // 	return  DB.Find(&users).Error
 // }
+
+func DeleteUser(p *User, id string) (err error) {
+	if err := DB.Where("id = ?",id).Delete(p).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
