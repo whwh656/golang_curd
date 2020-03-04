@@ -40,8 +40,12 @@ func TokenAuthMiddleware() gin.HandlerFunc {
 //Registerapi 外部调用必须首字母大写
 func Registerapi(r *gin.Engine) *gin.Engine {
 	api := r.Group("api/v1")
-	api.Use(TokenAuthMiddleware())
-	api.GET("/ping", controller.PingAPI)
-	api.POST("/users", controller.CreateUser)
-	return r
+	//api.use中间的作用范围是下面所有的接口
+	// api.Use(TokenAuthMiddleware())
+	// api.GET("/ping", controller.PingAPI)
+	// api.POST("/users", controller.CreateUser)
+	//方法2:作用于部分接口
+	api.GET("/ping",TokenAuthMiddleware(),controller.PingAPI)
+    api.POST("/users", controller.CreateUser)
+    return r
 }
