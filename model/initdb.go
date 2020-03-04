@@ -29,3 +29,8 @@ func InitMySQL() (*gorm.DB, error) {
 func (user *User) AddUser() error {
 	return DB.Create(user).Error
 }
+
+// ListUser list all table user 
+// func (users *User) ListUser() error {
+// 	return  DB.Find(&users).Error
+// }

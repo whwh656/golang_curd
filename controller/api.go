@@ -17,8 +17,21 @@ func PingAPI(c *gin.Context) {
 }
 
 //ListUser get users
-func ListUser() {
-
+func ListUser(c *gin.Context) {
+	users := []model.User{}
+	//gorm 获取数据库中的所有用户信息
+    if err := model.DB.Find(&users); err != nil {
+		fmt.Println("get all users fail!")
+		c.JSON(500, gin.H{
+			"errcode": 99991,
+			"msg":    "get fail",
+		})
+	}
+	//将数据库中获取的数据以json的格式返回给客户端
+	c.JSON(http.StatusOK,gin.H{
+		"errcode": 999999,
+		"msg":     users,
+	})
 }
 
 //CreateUser Post add a user  如何获取json数据存入mysql数据库
@@ -26,11 +39,6 @@ func CreateUser(c *gin.Context) {
 	user := model.User{}
 	// name := c.PostForm("name")
 	// age  := c.PostForm("age")
-	// c.JSON(http.StatusOK, gin.H{
-	// 	"method": c.Request.Method,
-	// 	"name": name,
-	// 	"job": age,
-	//  })
 	if err := c.BindJSON(&user); err != nil {
 		c.JSON(400, gin.H{
 			"errcode": 400,
@@ -49,4 +57,12 @@ func CreateUser(c *gin.Context) {
 			"msg":     "success",
 		})
 	}
+}
+
+func UpdateUser(c *gin.Context){
+
+}
+
+func DelUser(c *gin.Context){
+	
 }
