@@ -8,7 +8,7 @@ import (
 type User struct {
 	gorm.Model  `json:"-"`
 	Name string 
-	Age  int    
+	Age  int 
 }
 
 var user User

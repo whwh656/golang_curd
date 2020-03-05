@@ -61,6 +61,15 @@ func CreateUser(c *gin.Context) {
 
 //UpdateUser 更新数据
 func UpdateUser(c *gin.Context){
+	var user model.User
+	c.BindJSON(&user)
+	fmt.Println(user.Name)
+	err := model.UpdateUser(&user,user.Age,user.Name)
+	if err != nil {
+		c.JSON(404, nil)
+	} else {
+		c.JSON(200, user)
+	}
     
 }
 

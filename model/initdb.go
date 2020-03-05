@@ -2,17 +2,19 @@ package model
 
 import (
 	"curd/config"
-
+    "fmt"
 	"github.com/jinzhu/gorm"
 )
 
 var DB *gorm.DB
+
 
 //InitMySQL initdb
 func InitMySQL() (*gorm.DB, error) {
 	mysqlConfig := config.GetdbConf()
 	db, err := gorm.Open("mysql", mysqlConfig.Mysql.Dsn)
 	DB = db
+	db.LogMode(true)
 	// if err != nil {
 	// 	fmt.Println(err.Error())
 	// 	return 0
@@ -39,6 +41,17 @@ func DeleteUser(p *User, id string) (err error) {
 	if err := DB.Where("id = ?",id).Delete(p).Error; err != nil {
 		return err
 	}
+	return nil
+}
+
+
+//UpdateUser 
+func UpdateUser(p *User, age int,name string) (err error) {
+	DB.LogMode(true)
+	fmt.Println(age,name)
+	if err := DB.Debug().Model(&p).Where("name = ? ",name).Update("age",age).Error; err != nil {
+		return err
+	} 
 	return nil
 }
 

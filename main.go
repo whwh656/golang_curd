@@ -15,10 +15,10 @@ import (
 )
 
 func main() {
-	if _, err := model.InitMySQL(); err != nil {
-		fmt.Println("mysql init error")
-	} 
-		r := gin.Default()
+		if _, err := model.InitMySQL(); err != nil {
+			fmt.Println("mysql init error")
+		} 
+	    r := gin.Default()
 		route := api.Registerapi(r)
 		conf := config.GetConf()
 		route.Run(conf.Server.Port)
